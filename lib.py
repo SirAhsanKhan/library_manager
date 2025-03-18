@@ -1,25 +1,25 @@
 import json
 import os
 
-# File to store the library data
+# this file is used to store the data
 LIBRARY_FILE = "library.json"
 
-# Initialize the library as an empty list
+# this is crucial or wont work
 library = []
 
-# Load library from file if it exists
+
 def load_library():
     global library
     if os.path.exists(LIBRARY_FILE):
         with open(LIBRARY_FILE, "r") as file:
             library = json.load(file)
 
-# Save library to file
+
 def save_library():
     with open(LIBRARY_FILE, "w") as file:
         json.dump(library, file, indent=4)
 
-# Add a book to the library
+# add a book 
 def add_book():
     title = input("Enter the title: ")
     author = input("Enter the author: ")
@@ -38,7 +38,7 @@ def add_book():
     print(f"Book '{title}' added successfully!")
     save_library()
 
-# Remove a book from the library
+# remove a book 
 def remove_book():
     title = input("Enter the title of the book to remove: ")
     global library
@@ -46,7 +46,7 @@ def remove_book():
     print(f"Book '{title}' removed successfully!")
     save_library()
 
-# Search for a book by title or author
+# search for a book by title or author
 def search_book():
     search_term = input("Enter the title or author to search: ").lower()
     results = [book for book in library if search_term in book["title"].lower() or search_term in book["author"].lower()]
@@ -58,7 +58,7 @@ def search_book():
     else:
         print("No matching books found.")
 
-# Display all books in the library
+# display all books 
 def display_all_books():
     if not library:
         print("The library is empty.")
@@ -67,7 +67,7 @@ def display_all_books():
         for book in library:
             print(f"Title: {book['title']}, Author: {book['author']}, Year: {book['publication_year']}, Genre: {book['genre']}, Read: {'Yes' if book['read_status'] else 'No'}")
 
-# Display library statistics
+# display statistics
 def display_statistics():
     total_books = len(library)
     read_books = sum(book["read_status"] for book in library)
@@ -77,7 +77,7 @@ def display_statistics():
     print(f"Total Books: {total_books}")
     print(f"Percentage Read: {percentage_read:.2f}%")
 
-# Main menu
+
 def main_menu():
     while True:
         print("\nPersonal Library Manager")
@@ -106,7 +106,6 @@ def main_menu():
         else:
             print("Invalid choice. Please try again.")
 
-# Entry point of the program
 if __name__ == "__main__":
     load_library()
     main_menu()
